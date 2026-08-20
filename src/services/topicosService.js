@@ -61,3 +61,14 @@ export function excluirTopico(id) {
 
     return removido[0];
 }
+
+export function listarTopicos(){
+    
+    return topicos;
+}
+
+export async function listarTopicosPorMateria(materiaId){
+    const topicosPorMateria = topicos.filter(topico => topico.materiaId === materiaId);
+
+    return topicosPorMateria;
+}
