@@ -4,7 +4,9 @@ import {
     cadastrarTopico,
     buscarTopicoPorId,
     atualizarStatusTopico,
-    excluirTopico
+    excluirTopico, 
+    listarTopicos,
+    listarTopicosPorMateria
 } from "./services/topicosService.js";
 
 // EXECUÇÃO E TESTES MANUAIS
@@ -45,3 +47,14 @@ console.log(topicoExcluido);
 // ESTADO FINAL
 console.log("\n** ESTADO FINAL **");
 console.log(topicos)
+
+
+const todos = listarTopicos();
+console.log("\n** TODOS OS TÓPICOS **");
+console.log(todos);
+
+
+console.log("\n** TÓPICOS POR MATERIA **");
+const topicosDeJavaScript = await listarTopicosPorMateria(1);
+console.log("\n=== TÓPICOS DE JAVASCRIPT ===");
+console.log(topicosDeJavaScript);
