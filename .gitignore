@@ -1,0 +1,18 @@
+# Dependencies
+node_modules/
+
+# Environment variables
+.env
+
+# Build
+dist/
+build/
+
+# Tests
+coverage/
+
+# Editor
+.vscode/
+
+# System
+.DS_Store
