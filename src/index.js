@@ -55,6 +55,6 @@ console.log(todos);
 
 
 console.log("\n** TÓPICOS POR MATERIA **");
-const topicosDeJavaScript = await listarTopicosPorMateria(1);
+const topicosDeJavaScript = listarTopicosPorMateria(1);
 console.log("\n=== TÓPICOS DE JAVASCRIPT ===");
 console.log(topicosDeJavaScript);

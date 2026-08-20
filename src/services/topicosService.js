@@ -67,7 +67,7 @@ export function listarTopicos(){
     return topicos;
 }
 
-export async function listarTopicosPorMateria(materiaId){
+export function listarTopicosPorMateria(materiaId){
     const topicosPorMateria = topicos.filter(topico => topico.materiaId === materiaId);
 
     return topicosPorMateria;
