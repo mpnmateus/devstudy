@@ -1,3 +1,5 @@
+// Etapa 1: data model e topic queries
+
 const materias = [
     {
         id: 1,
@@ -79,3 +81,81 @@ console.log(topicosConcluido);
 const topicoEncontradoMateria = topicos.filter(topico => topico.materiaId === 1);
 console.log("\n=== TÓPICOS PERTENCENTES A MATERIA ID 1 ===");
 console.log(topicoEncontradoMateria);
+
+// Etapa 2: CRUD
+
+/*
+const novoTopico = {
+    id: 6,
+    materiaId: 3,
+    titulo: "Middlewares",
+    status: "Pendente"
+};
+
+topicos.push(novoTopico);
+console.log("\n=== APÓS CADASTRAR NOVO TÓPICO ===");
+console.log(topicos);
+*/
+
+
+let proximoTopicoId = 6;
+// CREATE
+function cadastrarTopico(materiaId, titulo, status){
+    const novoTopico = {
+        id: proximoTopicoId,
+        materiaId: materiaId,
+        titulo: titulo,
+        status: status
+    };
+    topicos.push(novoTopico);
+    proximoTopicoId++;
+    
+    return novoTopico;
+}
+
+const topicoCadastrado = cadastrarTopico(3, "Middlewares", "Pendente");
+console.log("\n=== [CREATE] NOVO TÓPICO ===");
+console.log(topicoCadastrado);
+
+// READ
+function buscarTopicoPorId(id){
+    const topicoEncontrado = topicos.find(topico => topico.id === id);
+    return topicoEncontrado;
+}
+
+const resultadoBusca = buscarTopicoPorId(3);
+console.log("\n=== [READ] BUSCA POR ID ===");
+console.log(resultadoBusca);
+
+// UPDATE
+function atualizarStatusTopico(id, novoStatus){
+    const topico = topicos.find(topico => topico.id === id);
+
+    if(!topico){
+        return null;
+    }
+
+    topico.status = novoStatus;
+
+    return topico;
+}
+console.log("\n=== [UPDATE] ATUALIZAR STATUS ===");
+console.log("Antes de atualizar: ", topicos.find(topico => topico.id === 2));
+const topicoAtualizado = atualizarStatusTopico(2, "Concluído");
+console.log("Depois de atualizar: ", topicoAtualizado);
+
+// DELETE
+function deletarTopico(id){
+    const indice = topicos.findIndex(topicos => topicos.id === id); // Splice precisa do indice e da quantidade de elementos a serem removidos, por isso preciso achar o índice
+    if(indice === -1){
+        return null;
+    }
+    const removido = topicos.splice(indice, 1); // Splice(indice de onde começa, quantidade a ser removida). Removido é um array com o elemento removido. 
+    return removido[0]; // Retorno o primeiro elemento do array, que é o objeto removido
+}
+
+const topicoRemovido = deletarTopico(5);
+
+console.log("\n=== [DELETE] DELETAR TÓPICO ===");
+console.log("Tópico removido: ", topicoRemovido);
+console.log("Lista de tópicos após remoção: ", topicos);
