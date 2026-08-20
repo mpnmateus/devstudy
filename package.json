@@ -1,0 +1,18 @@
+{
+  "name": "devstudy",
+  "version": "1.0.0",
+  "description": "Full-stack study management application",
+  "type": "module",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mpnmateus/devstudy.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module"
+}
