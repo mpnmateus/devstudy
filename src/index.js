@@ -7,9 +7,9 @@ import {
     excluirTopico
 } from "./services/topicosService.js";
 
-// EXECUÇÃO E TESTES
+// EXECUÇÃO E TESTES MANUAIS
 
-// TESTE CREATE
+// DEMONSTRAÇÃO CREATE
 console.log("\n** TESTE CREATE **");
 
 console.log("\n=== ANTES DO CADASTRO ===");
@@ -24,19 +24,19 @@ console.log("\n=== DEPOIS DO CADASTRO ===");
 console.log(topicos);
 
 
-// TESTE READ
+// DEMONSTRAÇÃO READ
 console.log("\n** TESTE READ **");
 const topicoEncontrado = buscarTopicoPorId(3);
 console.log("\n=== TÓPICO ENCONTRADO ===");
 console.log(topicoEncontrado);
 
-// TESTE UPDATE
+// DEMONSTRAÇÃO UPDATE
 console.log("\n** TESTE UPDATE **");
 const topicoAtualizado = atualizarStatusTopico(2, "Concluído");
 console.log("\n=== TÓPICO ATUALIZADO ===");
 console.log(topicoAtualizado);
 
-// TESTE DELETE
+// DEMONSTRAÇÃO DELETE
 console.log("\n** TESTE DELETE **");
 const topicoExcluido = excluirTopico(5);
 console.log("\n=== TÓPICO EXCLUÍDO ===");
