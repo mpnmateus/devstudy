@@ -62,13 +62,19 @@ export function excluirTopico(id) {
     return removido[0];
 }
 
-export function listarTopicos(){
+export async function listarTopicos(){
     
-    return topicos;
+    const resultado = await pool.query(
+        "SELECT * FROM topicos ORDER BY id" // id é parte da estrutura da tabela topicos
+    );
+
+    return resultado.rows; // retorna o array inteiro de tópicos
 }
 
-export function listarTopicosPorMateria(materiaId){
-    const topicosPorMateria = topicos.filter(topico => topico.materiaId === materiaId);
+export async function listarTopicosPorMateria(materiaId){
+    const resultado = await pool.query(
+        "SELECT * FROM topicos WHERE materia_id = $1 ORDER BY id", [materiaId]
+    );
 
-    return topicosPorMateria;
+    return resultado.rows;
 }
