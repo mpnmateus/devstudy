@@ -1,4 +1,5 @@
 import { topicos } from "../data/topicos.js";
+import { pool } from "../database/pool.js";
 
 let proximoTopicoId = 6;
 
@@ -21,13 +22,12 @@ export function cadastrarTopico(materiaId, titulo, status) {
 }
 
 // READ
-export function buscarTopicoPorId(id) {
+export async function buscarTopicoPorId(id) {
 
-    const topicoEncontrado = topicos.find(
-        topico => topico.id === id
+    const resultado = await pool.query(
+        "SELECT * FROM topicos WHERE id = $1", [id]
     );
-
-    return topicoEncontrado;
+    return resultado.rows[0];
 }
 
 // UPDATE 

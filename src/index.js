@@ -28,7 +28,7 @@ console.log(topicos);
 
 // DEMONSTRAÇÃO READ
 console.log("\n** TESTE READ **");
-const topicoEncontrado = buscarTopicoPorId(3);
+const topicoEncontrado = await buscarTopicoPorId(999);
 console.log("\n=== TÓPICO ENCONTRADO ===");
 console.log(topicoEncontrado);
 
@@ -49,7 +49,7 @@ console.log("\n** ESTADO FINAL **");
 console.log(topicos)
 
 
-const todos = listarTopicos();
+const todos = await listarTopicos();
 console.log("\n** TODOS OS TÓPICOS **");
 console.log(todos);
 
