@@ -1,24 +1,15 @@
 import { topicos } from "../data/topicos.js";
 import { pool } from "../database/pool.js";
 
-let proximoTopicoId = 6;
-
 
 // CREATE
-export function cadastrarTopico(materiaId, titulo, status) {
+export async function cadastrarTopico(materiaId, titulo, status) {
 
-    const novoTopico = {
-        id: proximoTopicoId,
-        materiaId: materiaId,
-        titulo: titulo,
-        status: status
-    };
-
-    topicos.push(novoTopico);
-
-    proximoTopicoId++;
-
-    return novoTopico;
+    const resultado = await pool.query(
+        "INSERT INTO topicos (materia_id, titulo, status) VALUES ($1, $2, $3) RETURNING *", 
+        [materiaId, titulo, status]
+    );
+    return resultado.rows[0];
 }
 
 // READ
