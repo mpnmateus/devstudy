@@ -36,9 +36,13 @@ console.log(topicoEncontrado);
 
 // DEMONSTRAÇÃO UPDATE
 console.log("\n** TESTE UPDATE **");
-const topicoAtualizado = atualizarStatusTopico(2, "Concluído");
+const topicoAtualizado = await atualizarStatusTopico(3, "Concluído");
 console.log("\n=== TÓPICO ATUALIZADO ===");
 console.log(topicoAtualizado);
+
+const topicoAtualizadoTitulo = await atualizarTituloTopico(3, "Promises e async/await");
+console.log("\n=== TÓPICO ATUALIZADO ===");
+console.log(topicoAtualizadoTitulo);
 
 // DEMONSTRAÇÃO DELETE
 console.log("\n** TESTE DELETE **");

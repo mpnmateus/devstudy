@@ -22,19 +22,19 @@ export async function buscarTopicoPorId(id) {
 }
 
 // UPDATE 
-export function atualizarStatusTopico(id, novoStatus) {
+export async function atualizarStatusTopico(id, novoStatus) {
 
-    const topico = topicos.find(
-        topico => topico.id === id
+    const resultado = await pool.query(
+        "UPDATE topicos SET status = $1 WHERE id = $2 RETURNING *", [novoStatus, id]
     );
+    return resultado.rows[0];
+}
 
-    if (!topico) {
-        return null;
-    }
-
-    topico.status = novoStatus;
-
-    return topico;
+export async function atualizarTituloTopico(id, novoTitulo){
+    const resultado = await pool.query(
+        "UPDATE topicos SET titulo = $1 WHERE id = $2 RETURNING *", [novoTitulo, id]
+    );
+    return resultado.rows[0];
 }
 
 // DELETE
