@@ -38,19 +38,12 @@ export async function atualizarTituloTopico(id, novoTitulo){
 }
 
 // DELETE
-export function excluirTopico(id) {
+export async function excluirTopico(id) {
 
-    const indice = topicos.findIndex(
-        topico => topico.id === id
+    const resultado = await pool.query(
+        "DELETE FROM topicos WHERE id = $1 RETURNING *", [id]
     );
-
-    if (indice === -1) {
-        return null;
-    }
-
-    const removido = topicos.splice(indice, 1);
-
-    return removido[0];
+    return resultado.rows[0];
 }
 
 export async function listarTopicos(){

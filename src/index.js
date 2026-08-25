@@ -45,7 +45,7 @@ console.log(topicoAtualizadoTitulo);
 
 // DEMONSTRAÇÃO DELETE
 console.log("\n** TESTE DELETE **");
-const topicoExcluido = excluirTopico(5);
+const topicoExcluido = await excluirTopico(5);
 console.log("\n=== TÓPICO EXCLUÍDO ===");
 console.log(topicoExcluido);
 
