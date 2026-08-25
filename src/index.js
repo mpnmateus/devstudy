@@ -6,7 +6,8 @@ import {
     atualizarStatusTopico,
     excluirTopico, 
     listarTopicos,
-    listarTopicosPorMateria
+    listarTopicosPorMateria,
+    atualizarTituloTopico
 } from "./services/topicosService.js";
 
 // EXECUÇÃO E TESTES MANUAIS
