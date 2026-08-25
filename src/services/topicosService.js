@@ -1,4 +1,3 @@
-import { topicos } from "../data/topicos.js";
 import { pool } from "../database/pool.js";
 
 
