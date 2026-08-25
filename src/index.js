@@ -19,8 +19,6 @@ console.log("\n=== ANTES DO CADASTRO ===");
 console.log(topicos);
 
 const novoTopico = await cadastrarTopico(1, "Promises", "Pendente");
-// const novoTopicoTesteFK = await cadastrarTopico(999, "Teste de FK", "Pendente"); // O postgreSQL não permite cadastrar um tópico com uma matéria_id que não existe na tabela materias, então isso vai gerar um erro de violação de chave estrangeira (foreign key violation).
-
 
 console.log("\n=== NOVO TÓPICO CADASTRADO ===");
 console.log(novoTopico);
