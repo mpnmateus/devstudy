@@ -1,5 +1,8 @@
 import express from "express";
-import { buscarTopicoPorId } from "./services/topicosService.js";
+import { 
+    buscarTopicoPorId, 
+    listarTopicos 
+} from "./services/topicosService.js";
 
 const app = express();
 
@@ -20,6 +23,20 @@ app.get("/status", (req, res) =>{
     });
 });
 
+
+app.get("/topicos", async (req, res) => {
+    try {
+        const topicos = await listarTopicos();
+        return res.json(topicos);
+
+    } catch (erro) {
+        console.error("Erro ao listar tópicos: ", erro);
+        return res.status(500).json({
+            erro: "Erro interno do servidor."
+        });
+    }
+});
+
 app.get("/topicos/:id", async (req, res) => {
     const id = Number(req.params.id);
 
@@ -38,7 +55,7 @@ app.get("/topicos/:id", async (req, res) => {
             });
         }
 
-        res.json(topico);
+        return res.json(topico);
 
     } catch (erro) {
         console.error("Erro ao buscar tópico: ", erro);
