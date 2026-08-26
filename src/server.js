@@ -23,9 +23,30 @@ app.get("/status", (req, res) =>{
 app.get("/topicos/:id", async (req, res) => {
     const id = Number(req.params.id);
 
-    const topico = await buscarTopicoPorId(id);
+    if(!Number.isInteger(id) || id <= 0){
+        return res.status(400).json({
+            erro: "ID inválido."
+        });
+    };
 
-    res.json(topico);
+    try {
+        const topico = await buscarTopicoPorId(id);
+
+        if(!topico){
+            return res.status(404).json({
+                erro: "Tópico não encontrado"
+            });
+        }
+
+        res.json(topico);
+
+    } catch (erro) {
+        console.error("Erro ao buscar tópico: ", erro);
+        return res.status(500).json({
+            erro: "Erro interno do servidor."
+        });
+    }
+    
 });
 
 
