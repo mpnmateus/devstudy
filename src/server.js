@@ -1,4 +1,5 @@
 import express from "express";
+import { buscarTopicoPorId } from "./services/topicosService.js";
 
 const app = express();
 
@@ -19,12 +20,12 @@ app.get("/status", (req, res) =>{
     });
 });
 
-app.get("/topicos/:id", (req, res) => {
+app.get("/topicos/:id", async (req, res) => {
     const id = Number(req.params.id);
 
-    res.json({
-        id: id
-    })
+    const topico = await buscarTopicoPorId(id);
+
+    res.json(topico);
 });
 
 
