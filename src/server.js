@@ -2,10 +2,12 @@ import express from "express";
 import { 
     buscarTopicoPorId, 
     listarTopicos,
-    listarTopicosPorMateria, 
+    listarTopicosPorMateria,
+    cadastrarTopico 
 } from "./services/topicosService.js";
 
 const app = express();
+app.use(express.json());
 
 const PORT = 3000;
 
@@ -82,6 +84,33 @@ app.get("/topicos/:id", async (req, res) => {
     
 });
 
+app.post("/topicos", async (req, res) => {
+    const { materiaId, titulo, status } = req.body;
+    
+    if(
+        !Number.isInteger(materiaId) || 
+        materiaId <= 0 ||
+        typeof titulo !== "string" ||
+        titulo.trim() === "" ||
+        typeof status !== "string" ||
+        status.trim() === ""
+    ) {
+        return res.status(400).json({
+            erro: "Dados inválidos."
+        });
+    }
+    
+    try{
+        const novoTopico = await cadastrarTopico( materiaId, titulo, status);
+        return res.status(201).json(novoTopico);
+        
+    } catch (erro) {
+        console.error("Erro ao cadastrar tópico:", erro);
+        return res.status(500).json({
+            erro: "Erro interno do servidor."
+        });
+    }
+});
 
 app.listen(PORT, () => {
     console.log(`Servidor rodando em http://localhost:${PORT}`);
