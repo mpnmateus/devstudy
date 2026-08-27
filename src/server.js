@@ -1,7 +1,8 @@
 import express from "express";
 import { 
     buscarTopicoPorId, 
-    listarTopicos 
+    listarTopicos,
+    listarTopicosPorMateria, 
 } from "./services/topicosService.js";
 
 const app = express();
@@ -25,7 +26,22 @@ app.get("/status", (req, res) =>{
 
 
 app.get("/topicos", async (req, res) => {
+    const materiaId = req.query.materiaId;
+    
     try {
+        if(materiaId !== undefined){
+            const id = Number(materiaId);
+
+            if(!Number.isInteger(id) || id <= 0){
+                return res.status(400).json({
+                    erro: "materiaId inválido."
+                });
+            }
+            const topicos = await listarTopicosPorMateria(id);
+            return res.json(topicos);
+
+        }
+        
         const topicos = await listarTopicos();
         return res.json(topicos);
 
