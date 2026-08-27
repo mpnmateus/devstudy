@@ -4,7 +4,8 @@ import {
     listarTopicos,
     listarTopicosPorMateria,
     cadastrarTopico, 
-    atualizarStatusTopico 
+    atualizarStatusTopico,
+    atualizarTituloTopico 
 } from "./services/topicosService.js";
 
 const app = express();
@@ -115,21 +116,48 @@ app.post("/topicos", async (req, res) => {
 
 app.patch("/topicos/:id", async (req, res) => {
     const id = Number(req.params.id);
-    const status = req.body.status;
+    const { titulo, status } = req.body;
 
     if(!Number.isInteger(id) || id <= 0){
         return res.status(400).json({
             erro: "ID inválido."
         });
     }
-    if(typeof status !== "string" || status.trim() === ""){
+
+    if(titulo === undefined && status === undefined){
+        return res.status(400).json({
+            erro: "Informe o titulo ou status para atualização."
+        });
+    }
+
+    if(
+        titulo != undefined &&
+        (typeof titulo !== "string" || titulo.trim() === "")
+    ){
+        return res.status(400).json({
+            erro: "Título inválido."
+        });
+    }
+
+    if(
+        status != undefined &&
+        (typeof status !== "string" || status.trim() === "")
+    ){
         return res.status(400).json({
             erro: "Status inválido."
         });
     }
 
     try {
-        const topicoAtualizado = await atualizarStatusTopico(id, status.trim());
+        let topicoAtualizado;
+
+        if(titulo !== undefined){
+            topicoAtualizado = await atualizarTituloTopico(id, titulo.trim());
+        }
+
+        if(status !== undefined){
+            topicoAtualizado = await atualizarStatusTopico(id, status.trim());
+        }
 
         if(!topicoAtualizado){
             return res.status(404).json({
