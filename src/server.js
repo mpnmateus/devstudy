@@ -5,7 +5,8 @@ import {
     listarTopicosPorMateria,
     cadastrarTopico, 
     atualizarStatusTopico,
-    atualizarTituloTopico 
+    atualizarTituloTopico, 
+    excluirTopico 
 } from "./services/topicosService.js";
 
 const app = express();
@@ -169,6 +170,34 @@ app.patch("/topicos/:id", async (req, res) => {
 
     } catch (erro){
         console.error("Erro ao atualizar tópico: ", erro);
+        return res.status(500).json({
+            erro: "Erro interno do servidor."
+        });
+    }
+});
+
+app.delete("/topicos/:id", async (req, res) => {
+    const id = Number(req.params.id);
+
+    if(!Number.isInteger(id) || id <= 0){
+        return res.status(400).json({
+            erro: "ID inválido."
+        });
+    }
+
+    try {
+        const topicoExcluido = await excluirTopico(id);
+
+        if(!topicoExcluido){
+            return res.status(404).json({
+                erro: "Tópico não encontrado."
+            });
+        }
+
+        return res.status(204).send();
+
+    } catch (erro) {
+        console.error("Erro ao excluir tópico: ", erro);
         return res.status(500).json({
             erro: "Erro interno do servidor."
         });
