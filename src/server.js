@@ -12,7 +12,7 @@ import {
 const app = express();
 app.use(express.json());
 
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 function converterId(valor){
     const id = Number(valor);
