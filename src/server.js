@@ -14,6 +14,15 @@ app.use(express.json());
 
 const PORT = 3000;
 
+function converterId(valor){
+    const id = Number(valor);
+
+    if (!Number.isInteger(id) || id <= 0){
+        return null;
+    }
+    return id;
+}
+
 app.get("/", (req, res) => {
     res.send("DevStudy API funcionando!");
 });
@@ -35,9 +44,9 @@ app.get("/topicos", async (req, res) => {
     
     try {
         if(materiaId !== undefined){
-            const id = Number(materiaId);
+            const id = converterId(materiaId);
 
-            if(!Number.isInteger(id) || id <= 0){
+            if(id === null){
                 return res.status(400).json({
                     erro: "materiaId inválido."
                 });
@@ -59,9 +68,9 @@ app.get("/topicos", async (req, res) => {
 });
 
 app.get("/topicos/:id", async (req, res) => {
-    const id = Number(req.params.id);
+    const id = converterId(req.params.id);
 
-    if(!Number.isInteger(id) || id <= 0){
+    if(id === null){
         return res.status(400).json({
             erro: "ID inválido."
         });
@@ -116,10 +125,10 @@ app.post("/topicos", async (req, res) => {
 });
 
 app.patch("/topicos/:id", async (req, res) => {
-    const id = Number(req.params.id);
+    const id = converterId(req.params.id);
     const { titulo, status } = req.body;
 
-    if(!Number.isInteger(id) || id <= 0){
+    if(id === null){
         return res.status(400).json({
             erro: "ID inválido."
         });
@@ -177,9 +186,9 @@ app.patch("/topicos/:id", async (req, res) => {
 });
 
 app.delete("/topicos/:id", async (req, res) => {
-    const id = Number(req.params.id);
+    const id = converterId(req.params.id);
 
-    if(!Number.isInteger(id) || id <= 0){
+    if(id === null){
         return res.status(400).json({
             erro: "ID inválido."
         });

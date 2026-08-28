@@ -20,6 +20,23 @@ export async function buscarTopicoPorId(id) {
     return resultado.rows[0];
 }
 
+export async function listarTopicos(){
+    
+    const resultado = await pool.query(
+        "SELECT * FROM topicos ORDER BY id" // id é parte da estrutura da tabela topicos
+    );
+
+    return resultado.rows; // retorna o array inteiro de tópicos
+}
+
+export async function listarTopicosPorMateria(materiaId){
+    const resultado = await pool.query(
+        "SELECT * FROM topicos WHERE materia_id = $1 ORDER BY id", [materiaId]
+    );
+
+    return resultado.rows;
+}
+
 // UPDATE 
 export async function atualizarStatusTopico(id, novoStatus) {
 
@@ -43,21 +60,4 @@ export async function excluirTopico(id) {
         "DELETE FROM topicos WHERE id = $1 RETURNING *", [id]
     );
     return resultado.rows[0];
-}
-
-export async function listarTopicos(){
-    
-    const resultado = await pool.query(
-        "SELECT * FROM topicos ORDER BY id" // id é parte da estrutura da tabela topicos
-    );
-
-    return resultado.rows; // retorna o array inteiro de tópicos
-}
-
-export async function listarTopicosPorMateria(materiaId){
-    const resultado = await pool.query(
-        "SELECT * FROM topicos WHERE materia_id = $1 ORDER BY id", [materiaId]
-    );
-
-    return resultado.rows;
 }
