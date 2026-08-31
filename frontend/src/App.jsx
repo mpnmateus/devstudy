@@ -2,6 +2,7 @@ import Cabecalho from "./components/Cabecalho.jsx";
 import ResumoEstudos from "./components/ResumoEstudos.jsx";
 import MensagemInicial from "./components/MensagemInicial.jsx";
 import ListaTopicos from "./components/ListaTopicos.jsx";
+import FiltroStatus from "./components/FiltroStatus.jsx";
 
 function App() {
   const topicos = [
@@ -36,6 +37,7 @@ function App() {
       <Cabecalho />
       <ResumoEstudos />
       <MensagemInicial />
+      <FiltroStatus />
       <ListaTopicos topicos={topicos}/>
     </div>
   );
