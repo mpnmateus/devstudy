@@ -5,6 +5,7 @@ import ResumoEstudos from "./components/ResumoEstudos.jsx";
 import MensagemInicial from "./components/MensagemInicial.jsx";
 import ListaTopicos from "./components/ListaTopicos.jsx";
 import FiltroStatus from "./components/FiltroStatus.jsx";
+import FormularioTopico from "./components/FormularioTopico.jsx";
 
 function App() {
   const [topicos, setTopicos] = useState([]);
@@ -58,6 +59,8 @@ function App() {
       <MensagemInicial />
 
       <FiltroStatus />
+
+      <FormularioTopico aoCadastrar={buscarTopicos}/>
 
       <ListaTopicos topicos={topicos}/>
     </div>
