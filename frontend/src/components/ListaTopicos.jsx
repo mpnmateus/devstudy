@@ -1,6 +1,6 @@
 import Topico from "./Topico.jsx";
 
-function ListaTopicos({ topicos }){
+function ListaTopicos({ topicos, aoAtualizar }){
     if(topicos.length === 0){
         return (
             <section>
@@ -17,8 +17,10 @@ function ListaTopicos({ topicos }){
             {topicos.map((topico) => (
                 <Topico 
                 key={topico.id}
+                id={topico.id}
                 titulo={topico.titulo}
                 status={topico.status}
+                aoAtualizar={aoAtualizar}
                 />
             ))}
         </section>

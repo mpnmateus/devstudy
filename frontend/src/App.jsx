@@ -62,7 +62,10 @@ function App() {
 
       <FormularioTopico aoCadastrar={buscarTopicos}/>
 
-      <ListaTopicos topicos={topicos}/>
+      <ListaTopicos 
+        topicos={topicos}
+        aoAtualizar={buscarTopicos}
+      />
     </div>
   );
 }
