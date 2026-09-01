@@ -10,7 +10,6 @@ function ListaTopicos({ topicos }){
                 key={topico.id}
                 titulo={topico.titulo}
                 status={topico.status}
-                materia={topico.materia}
                 />
             ))}
         </section>
