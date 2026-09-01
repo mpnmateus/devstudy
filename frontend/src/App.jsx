@@ -8,19 +8,46 @@ import FiltroStatus from "./components/FiltroStatus.jsx";
 
 function App() {
   const [topicos, setTopicos] = useState([]);
-  
-  console.log("App renderizou");
+  const [carregando, setCarregando] = useState(true);
+  const [erro, setErro] = useState("");
+
   async function buscarTopicos(){
-    const resposta = await fetch("http://localhost:3000/topicos");
-    const dados = await resposta.json();
-    console.log("Dados recebidos da API");
-    console.log(dados);
-    setTopicos(dados);
+    setErro("");
+    setCarregando(true);
+    
+    try {
+      const resposta = await fetch("http://localhost:3000/topicos");
+      
+      if(!resposta.ok){
+        throw new Error("Erro ao buscar tópicos.");
+      }
+
+      const dados = await resposta.json();
+
+      setTopicos(dados);
+
+    } catch (erro){
+      console.error("Erro ao carregar tópicos: ", erro);
+      setErro("Não foi possível carregar os tópicos.");
+    
+    } finally {
+      setCarregando(false);
+      console.log("Finalizando requisição");
+    }
+
   }
 
   useEffect(() => {
     buscarTopicos();
   }, []);
+
+  if(carregando){
+      return <p>Carregando tópicos...</p>
+  }
+
+  if(erro){
+    return <p>{erro}</p>
+  }
 
   return (
     <div>

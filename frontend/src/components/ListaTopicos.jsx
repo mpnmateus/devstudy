@@ -1,6 +1,15 @@
 import Topico from "./Topico.jsx";
 
 function ListaTopicos({ topicos }){
+    if(topicos.length === 0){
+        return (
+            <section>
+                <h2>Tópicos de estudo</h2>
+                <p>Nenhum tópico cadastrado</p>
+            </section>
+        );
+    }
+    
     return (
         <section>
             <h2>Tópicos de estudo</h2>
