@@ -4,6 +4,7 @@ function Topico({ id, titulo, status, aoAtualizar }){
   
   const [atualizando, setAtualizando] = useState(false);
   const [erro, setErro] = useState("");
+  const [excluindo, setExcluindo] = useState(false);
 
   async function atualizarStatus(novoStatus) {
     setAtualizando(true);
@@ -36,10 +37,45 @@ function Topico({ id, titulo, status, aoAtualizar }){
     }
   }
 
+  async function excluirTopico(){
+    const confirmou = window.confirm(
+        `Deseja realmente excluir o tópico "${titulo}"?`
+      );
+
+      if(!confirmou){
+        return;
+      }
+      setErro("");
+      setExcluindo(true);
+
+    try {     
+      const resposta = await fetch(
+        `http://localhost:3000/topicos/${id}`,
+        {
+          method: "DELETE",
+        }
+      );
+
+      if(!resposta.ok){
+        throw new Error("Erro ao excluir tópico.")
+      }
+
+      await aoAtualizar();
+
+    } catch (erro) {
+      console.error(erro);
+      setErro("Não foi possível excluir o tópico.");
+    } finally {
+      setExcluindo(false);
+    } 
+  }
+
   return (
     <div>
       <h3>Tópico: {titulo}</h3>
+      
       <p>Status: {status}</p>
+      
       <select
         value={status}
         disabled={atualizando}
@@ -50,11 +86,15 @@ function Topico({ id, titulo, status, aoAtualizar }){
         <option value="Concluído">Concluído</option>
 
       </select>
+
+      <button 
+        disabled={excluindo || atualizando}
+        onClick={excluirTopico}>
+        {excluindo ? "Excluindo..." : "Excluir" }
+      </button>
       
       {atualizando && <p>Atualizando...</p>}
       {erro && <p>{erro}</p>}
-
-    
 
     </div>  
     );
