@@ -1,26 +1,27 @@
 function FiltroStatus({ statusSelecionado, aoSelecionarStatus, }){
 
+    const status = [
+        "Todos",
+        "Pendente",
+        "Em andamento",
+        "Concluído",
+    ];
+
     return(
-        <section>
-            <h2>Filtrar tópicos</h2>
-            <p>Status selecionado: {statusSelecionado}</p>
-            
-            <button onClick={() => aoSelecionarStatus("Todos")}>
-                Todos
-            </button>
-            
-            <button onClick={() => aoSelecionarStatus("Pendente")}>
-                Pendentes
-            </button>
-
-            <button onClick={() => aoSelecionarStatus("Em andamento")}>
-                Em andamento
-            </button>
-
-            <button onClick={() => aoSelecionarStatus("Concluído")}>
-                Concluídos
-            </button>
-
+        <section className="filtros">
+            {status.map((item) => (
+                <button
+                    key={item}
+                    className={
+                        statusSelecionado === item
+                        ? "filtro ativo"
+                        : "filtro"
+                    }
+                    onClick={() => aoSelecionarStatus(item)}
+                >
+                    {item}
+                </button>
+            ))}
         </section>
     );
 }

@@ -71,32 +71,36 @@ function Topico({ id, titulo, status, aoAtualizar }){
   }
 
   return (
-    <div>
-      <h3>Tópico: {titulo}</h3>
-      
-      <p>Status: {status}</p>
-      
-      <select
-        value={status}
-        disabled={atualizando}
-        onChange={(evento) => atualizarStatus(evento.target.value)}
-      >
-        <option value="Pendente">Pendente</option>
-        <option value="Em andamento">Em andamento</option>
-        <option value="Concluído">Concluído</option>
+    <article className="topico-card">
+      <div className="topico-info">
+        <h3>{titulo}</h3>
+        <span className="status">{status}</span>
+      </div>
 
-      </select>
+      <div className="topico-acoes">
+        <select
+          value={status}
+          disabled={atualizando || excluindo}
+          onChange={(evento) => atualizarStatus(evento.target.value)}
+        >
+          <option value="Pendente">Pendente</option>
+          <option value="Em andamento">Em andamento</option>
+          <option value="Concluído">Concluído</option>
+        </select>
 
-      <button 
-        disabled={excluindo || atualizando}
-        onClick={excluirTopico}>
-        {excluindo ? "Excluindo..." : "Excluir" }
-      </button>
-      
-      {atualizando && <p>Atualizando...</p>}
-      {erro && <p>{erro}</p>}
+        <button 
+          className="botao botao-perigo"
+          disabled={excluindo || atualizando}
+          onClick={excluirTopico}>
+          {excluindo ? "Excluindo..." : "Excluir" }
+        </button>
 
-    </div>  
+      </div>
+
+      {atualizando && <p className="mensagem-info">Atualizando...</p>}
+      {erro && <p className="mensagem-erro">{erro}</p>}
+
+    </article>  
     );
 }
 

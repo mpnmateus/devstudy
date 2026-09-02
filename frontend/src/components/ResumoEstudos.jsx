@@ -6,13 +6,16 @@ function ResumoEstudos({ topicos }) {
     ).length;
 
     return (
-        <section>
-            <h2>Resumo dos Estudos</h2>
-            
-            <p>Total de tópicos: {totalTopicos}</p>
-            
-            <p>Concluídos: {concluidos}</p>
+        <section className="resumo">
+        <div className="resumo-card">
+            <span>Total de tópicos</span>
+            <strong>{totalTopicos}</strong>
+        </div>
 
+        <div className="resumo-card">
+            <span>Concluídos</span>
+            <strong>{concluidos}</strong>
+        </div>
         </section>
     );
 }

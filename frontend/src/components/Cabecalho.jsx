@@ -1,6 +1,6 @@
 function Cabecalho(){
     return (
-        <header>
+        <header className="cabecalho">
             <h1>DevStudy</h1>
             <p>
                 Organize seus estudos e acompanhe seus tópicos.

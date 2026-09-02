@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 
+import "./App.css";
+
 import Cabecalho from "./components/Cabecalho.jsx";
 import ResumoEstudos from "./components/ResumoEstudos.jsx";
 import ListaTopicos from "./components/ListaTopicos.jsx";
@@ -56,22 +58,26 @@ function App() {
       );
 
   return (
-    <div>
-      <Cabecalho />
+    <div className="app">
+      <main className="container">
+        <Cabecalho />
 
-      <ResumoEstudos topicos={topicos}/>
+        <ResumoEstudos topicos={topicos}/>
 
-      <FiltroStatus 
-        statusSelecionado={statusSelecionado}
-        aoSelecionarStatus={setStatusSelecionado}
-      />
+        <FormularioTopico aoCadastrar={buscarTopicos}/>
 
-      <FormularioTopico aoCadastrar={buscarTopicos}/>
+        <FiltroStatus 
+          statusSelecionado={statusSelecionado}
+          aoSelecionarStatus={setStatusSelecionado}
+        />
 
-      <ListaTopicos 
-        topicos={topicosFiltrados}
-        aoAtualizar={buscarTopicos}
-      />
+        <ListaTopicos 
+          topicos={topicosFiltrados}
+          aoAtualizar={buscarTopicos}
+        />
+
+      </main>
+      
     </div>
   );
 }

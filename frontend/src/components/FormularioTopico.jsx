@@ -58,10 +58,10 @@ function FormularioTopico({ aoCadastrar}){
     }
 
     return (
-        <section>
+        <section className="painel">
             <h2>Novo tópico</h2>
-            <form onSubmit={cadastrarTopico}> 
-                <div>
+            <form className="formulario" onSubmit={cadastrarTopico}> 
+                <div className="campo">
                     <label htmlFor="materiaId">
                         ID da matéria: 
                     </label>
@@ -73,7 +73,7 @@ function FormularioTopico({ aoCadastrar}){
                     />
                 </div>
 
-                <div>
+                <div className="campo">
                     <label htmlFor="titulo">
                         Título: 
                     </label>
@@ -86,7 +86,7 @@ function FormularioTopico({ aoCadastrar}){
                 </div>
                 
 
-                <div>
+                <div className="campo">
                     <label htmlFor="status">
                         Status: 
                     </label>
@@ -100,9 +100,9 @@ function FormularioTopico({ aoCadastrar}){
                         <option value="Concluído">Concluído</option>
                     </select>
                 </div>
-                {erro && <p>{erro}</p>}
+                {erro && <p className="mensagem-erro">{erro}</p>}
 
-                <button type="submit" disabled={enviando}>
+                <button className="botao botao-primario" type="submit" disabled={enviando}>
                     {enviando ? "Enviando..." : "Cadastrar"}
                 </button>
                 
