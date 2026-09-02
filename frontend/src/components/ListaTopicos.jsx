@@ -5,7 +5,7 @@ function ListaTopicos({ topicos, aoAtualizar }){
         return (
             <section>
                 <h2>Tópicos de estudo</h2>
-                <p>Nenhum tópico cadastrado</p>
+                <p>Nenhum tópico encontrado.</p>
             </section>
         );
     }

@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 
 import Cabecalho from "./components/Cabecalho.jsx";
 import ResumoEstudos from "./components/ResumoEstudos.jsx";
-import MensagemInicial from "./components/MensagemInicial.jsx";
 import ListaTopicos from "./components/ListaTopicos.jsx";
 import FiltroStatus from "./components/FiltroStatus.jsx";
 import FormularioTopico from "./components/FormularioTopico.jsx";
@@ -11,10 +10,9 @@ function App() {
   const [topicos, setTopicos] = useState([]);
   const [carregando, setCarregando] = useState(true);
   const [erro, setErro] = useState("");
+  const [statusSelecionado, setStatusSelecionado] = useState("Todos");
 
   async function buscarTopicos(){
-    setErro("");
-    setCarregando(true);
     
     try {
       const resposta = await fetch("http://localhost:3000/topicos");
@@ -26,6 +24,7 @@ function App() {
       const dados = await resposta.json();
 
       setTopicos(dados);
+      setErro("");
 
     } catch (erro){
       console.error("Erro ao carregar tópicos: ", erro);
@@ -33,7 +32,6 @@ function App() {
     
     } finally {
       setCarregando(false);
-      console.log("Finalizando requisição");
     }
 
   }
@@ -50,20 +48,28 @@ function App() {
     return <p>{erro}</p>
   }
 
+  const topicosFiltrados = 
+    statusSelecionado === "Todos" 
+    ? topicos 
+    : topicos.filter(
+        (topico) => topico.status === statusSelecionado
+      );
+
   return (
     <div>
       <Cabecalho />
 
-      <ResumoEstudos />
+      <ResumoEstudos topicos={topicos}/>
 
-      <MensagemInicial />
-
-      <FiltroStatus />
+      <FiltroStatus 
+        statusSelecionado={statusSelecionado}
+        aoSelecionarStatus={setStatusSelecionado}
+      />
 
       <FormularioTopico aoCadastrar={buscarTopicos}/>
 
       <ListaTopicos 
-        topicos={topicos}
+        topicos={topicosFiltrados}
         aoAtualizar={buscarTopicos}
       />
     </div>

@@ -97,7 +97,7 @@ function FormularioTopico({ aoCadastrar}){
                     >
                         <option value="Pendente">Pendente</option>
                         <option value="Em andamento">Em andamento</option>
-                        <option value="Concluido">Concluído</option>
+                        <option value="Concluído">Concluído</option>
                     </select>
                 </div>
                 {erro && <p>{erro}</p>}

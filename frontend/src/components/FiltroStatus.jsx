@@ -1,36 +1,26 @@
-import { useState } from "react";
+function FiltroStatus({ statusSelecionado, aoSelecionarStatus, }){
 
-function FiltroStatus(){
-    const [statusSelecionado, setStatusSelecionado] = useState("Todos");
-
-    function selecionarTodos(){
-        setStatusSelecionado("Todos");
-    }
-    function selecionarConcluidos(){
-        setStatusSelecionado("Concluído");
-    }
-    function selecionarPendentes(){
-        setStatusSelecionado("Pendente");
-    }
-    function selecionarEmAndamento(){
-        setStatusSelecionado("Em andamento");
-    }
     return(
         <section>
-            <h2>Filtro</h2>
+            <h2>Filtrar tópicos</h2>
             <p>Status selecionado: {statusSelecionado}</p>
-            <button onClick={selecionarTodos}>
+            
+            <button onClick={() => aoSelecionarStatus("Todos")}>
                 Todos
             </button>
-            <button onClick={selecionarConcluidos}>
-                Concluídos
-            </button>
-            <button onClick={selecionarPendentes}>
+            
+            <button onClick={() => aoSelecionarStatus("Pendente")}>
                 Pendentes
             </button>
-            <button onClick={selecionarEmAndamento}>
+
+            <button onClick={() => aoSelecionarStatus("Em andamento")}>
                 Em andamento
             </button>
+
+            <button onClick={() => aoSelecionarStatus("Concluído")}>
+                Concluídos
+            </button>
+
         </section>
     );
 }
